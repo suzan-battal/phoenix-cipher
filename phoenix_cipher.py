@@ -426,27 +426,27 @@ def main():
     parola = "MySecretPassword123!"
     anahtar = cipher.Anahtar_Uret(parola)
     
-    print(f"\n📌 Parola: {parola}")
-    print(f"🔑 Üretilen Anahtar (hex): {anahtar.hex()}")
+    print(f"\n Parola: {parola}")
+    print(f" Üretilen Anahtar (hex): {anahtar.hex()}")
     
     # Örnek metin
     duz_metin = "Merhaba Dünya! Bu bir test mesajıdır."
-    print(f"\n📝 Düz Metin: {duz_metin}")
+    print(f"\n Düz Metin: {duz_metin}")
     
     # Şifreleme
     sifreli_metin = cipher.Sifrele(duz_metin, anahtar)
-    print(f"\n🔒 Şifreli Metin (hex): {sifreli_metin.hex()}")
+    print(f"\n Şifreli Metin (hex): {sifreli_metin.hex()}")
     print(f"   Uzunluk: {len(sifreli_metin)} byte")
     
     # Deşifreleme
     cozulmus_metin = cipher.Desifrele(sifreli_metin, anahtar)
-    print(f"\n🔓 Deşifre Edilmiş: {cozulmus_metin}")
+    print(f"\n Deşifre Edilmiş: {cozulmus_metin}")
     
     # Doğrulama
     if duz_metin == cozulmus_metin:
-        print("\n✅ BAŞARILI: Şifreleme ve deşifreleme doğru çalışıyor!")
+        print("\n BAŞARILI: Şifreleme ve deşifreleme doğru çalışıyor!")
     else:
-        print("\n❌ HATA: Deşifreleme başarısız!")
+        print("\n HATA: Deşifreleme başarısız!")
     
     print("\n" + "=" * 60)
 
