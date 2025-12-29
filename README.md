@@ -39,15 +39,6 @@
 
 ---
 
-## 🚀 Hızlı Başlangıç
-
-### Kurulum
-
-```bash
-# Python 3.6+ gereklidir
-python3 --version
-```
-
 ### Temel Kullanım
 
 ```python
@@ -217,14 +208,4 @@ Bu eğitim projesidir. İyileştirme önerileri:
 **Geliştirici:** Suzan  
 **Tarih:** 29 Aralık 2025
 
----
 
-## 🙏 Teşekkürler
-
-Bu proje, Claude Shannon'ın "Confusion ve Diffusion" teorisinden ve AES algoritmasının tasarımından ilham almıştır.
-
----
-
-> *"Kriptografi, paranoyakların matematiktir."*
-
-**✨ Projeyi beğendiyseniz ⭐ verin! ✨**
