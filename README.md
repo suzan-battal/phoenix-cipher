@@ -1,4 +1,4 @@
-# 🔥 PHOENIX Kriptografik Algoritma Projesi
+#  PHOENIX Kriptografik Algoritma Projesi
 
 **PHOENIX** - Permutation and Hash-based Encrypted Network with Intelligent XOR
 
@@ -6,7 +6,7 @@
 
 ---
 
-## 📦 Proje İçeriği
+##  Proje İçeriği
 
 ### Aşama 1: Tasarım Dokümantasyonu
 - **[Phase1_Design_Report.md](Phase1_Design_Report.md)** - Algoritma tasarım şartnamesi
@@ -58,19 +58,9 @@ duz = cipher.Desifrele(sifreli, anahtar)
 print(duz)  # Output: "Gizli mesaj!"
 ```
 
-### Testleri Çalıştır
 
-```bash
-# Tüm testleri çalıştır
-python3 test_phoenix.py
 
-# Kriptanaliz yap
-python3 cryptanalysis.py
-```
-
----
-
-## 📊 Algoritma Özellikleri
+##  Algoritma Özellikleri
 
 | Özellik | Değer |
 |---------|-------|
@@ -82,19 +72,19 @@ python3 cryptanalysis.py
 | **Padding** | PKCS#7 |
 
 ### Kullanılan Teknikler
-- ✅ S-Box (Substitution) - Byte ikamesi
-- ✅ Permütasyon - Byte karıştırma
-- ✅ XOR Whitening - Anahtar katmanları
-- ✅ MixColumns - GF(2^8) çarpımı
+-  S-Box (Substitution) - Byte ikamesi
+-  Permütasyon - Byte karıştırma
+-  XOR Whitening - Anahtar katmanları
+-  MixColumns - GF(2^8) çarpımı
 
 ---
 
-## 🧪 Test Sonuçları
+##  Test Sonuçları
 
 ```
-✅ Test 1 (Şifreleme/Deşifreleme): BAŞARILI (%100)
-✅ Test 2 (Çığ Etkisi): BAŞARILI (%45.12 bit değişimi)
-✅ Test 3 (Padding): BAŞARILI (6/6 test)
+ Test 1 (Şifreleme/Deşifreleme): BAŞARILI (%100)
+ Test 2 (Çığ Etkisi): BAŞARILI (%45.12 bit değişimi)
+ Test 3 (Padding): BAŞARILI (6/6 test)
 ```
 
 ### Çığ Etkisi Örneği
@@ -104,65 +94,56 @@ Orijinal Anahtar:     c878f4ada7a8cb5441eb0ce8e4da88e6
 Değiştirilmiş:        c978f4ada7a8cb5441eb0ce8e4da88e6
                       ^ (1 bit fark)
 
-Sonuç: 231/512 bit değişti (% 45.12) ✅
+Sonuç: 231/512 bit değişti (% 45.12)
 ```
 
 ---
 
-## 🔍 Güvenlik Analizi Sonuçları
+##  Güvenlik Analizi Sonuçları
 
 ### Güvenlik Skoru: **7.0/10**
 
 | Saldırı Türü | Sonuç | Durum |
 |--------------|-------|-------|
-| Frekans Analizi | Orta entropi | ⚠️ Kabul edilebilir |
-| Bilinen Düz Metin | Başarısız | ✅ Dayanıklı |
-| Sözlük Saldırısı | **Başarılı** | ❌ Zafiyet |
-| Zamanlama Saldırısı | Başarısız | ✅ Dayanıklı |
+| Frekans Analizi | Orta entropi |  Kabul edilebilir |
+| Bilinen Düz Metin | Başarısız |  Dayanıklı |
+| Sözlük Saldırısı | **Başarılı** |  Zafiyet |
+| Zamanlama Saldırısı | Başarısız |  Dayanıklı |
 
 ### Bulunan Zafiyetler
 
-#### ⚠️ Kritik: Zayıf Parola Kullanımı
+####  Kritik: Zayıf Parola Kullanımı
 - **Sorun:** Salt ve iterasyon yok
 - **Etki:** Sözlük saldırısı ile ~30-60 dakikada kırılabilir
 - **Çözüm:** PBKDF2/Argon2 kullan
 
-#### ⚠️ Orta: Tahmin Edilebilir S-Box
+####  Orta: Tahmin Edilebilir S-Box
 - **Sorun:** Matematiksel formül ile üretiliyor
 - **Çözüm:** AES S-Box kullan
 
-#### ⚠️ Düşük: 8 Tur Yetersiz Olabilir
+####  Düşük: 8 Tur Yetersiz Olabilir
 - **Sorun:** Gelişmiş kriptanaliz için marjin düşük
 - **Çözüm:** 12-16 tur kullan
 
 ---
 
-## 💡 Öğrenilen Dersler
+##  Öğrenilen Dersler
 
-### Başarılar ✅
+### Başarılar 
 - Teoriden pratiğe başarılı geçiş
 - Kapsamlı test coverage
 - Gerçekçi güvenlik analizi
 
-### Keşifler 🔍
+### Keşifler 
 - En güçlü algoritma bile zayıf parola ile kırılabilir
-- Çığ etkisi çok önemli (PHOENIX: %45 ✅)
+- Çığ etkisi çok önemli (PHOENIX: %45 )
 - KDF (Key Derivation Function) şart
 
 ---
 
-## ⚠️ Önemli Uyarı
 
-**PHOENIX EĞİTİM AMAÇLIDIR - ÜRETİMDE KULLANMAYIN!**
 
-Gerçek uygulamalarda kullanın:
-- 🔐 **libsodium** - Modern, kolay, güvenli
-- 🔐 **cryptography.io** - Python için kapsamlı
-- 🔐 **AES** - NIST standardı
-
----
-
-## 📚 Dokümantasyon
+##  Dokümantasyon
 
 - [Tasarım Raporu](Phase1_Design_Report.md) - Matematiksel detaylar
 - [Kriptanaliz Raporu](Phase3_Cryptanalysis_Report.md) - Güvenlik analizi
@@ -170,7 +151,7 @@ Gerçek uygulamalarda kullanın:
 
 ---
 
-## 🎓 Proje Bilgileri
+##  Proje Bilgileri
 
 **Proje Türü:** Akademik - Kriptografi Eğitimi  
 **Süre:** 3 hafta (12.12.2025 - 26.12.2025)  
@@ -179,20 +160,20 @@ Gerçek uygulamalarda kullanın:
 
 ---
 
-## 📈 İstatistikler
+##  İstatistikler
 
 ```
-📝 Kod Satırı: ~1,200 satır
-📄 Dokümantasyon: 25+ sayfa
-🧪 Test: 15+ senaryo
-🔒 Başarı Oranı: %100 (şifreleme/deşifreleme)
-🎯 Çığ Etkisi: %45.12
-⚠️ Zafiyet: 3 adet bulundu
+ Kod Satırı: ~1,200 satır
+ Dokümantasyon: 25+ sayfa
+ Test: 15+ senaryo
+ Başarı Oranı: %100 (şifreleme/deşifreleme)
+ Çığ Etkisi: %45.12
+ Zafiyet: 3 adet bulundu
 ```
 
 ---
 
-## 🤝 Katkıda Bulunma
+##  Katkıda Bulunma
 
 Bu eğitim projesidir. İyileştirme önerileri:
 
@@ -203,7 +184,7 @@ Bu eğitim projesidir. İyileştirme önerileri:
 
 ---
 
-## 📞 İletişim
+## İletişim
 
 **Geliştirici:** Suzan  
 **Tarih:** 29 Aralık 2025
