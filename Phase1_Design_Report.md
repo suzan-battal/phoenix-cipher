@@ -432,6 +432,6 @@ PHOENIX algoritması:
 
 ---
 
-**Tasarım Tarihi**: 12 Aralık 2025  
+**Tasarım Tarihi**: 29 Aralık 2025  
 **Tasarımcı**: Suzan  
 **Referanslar**: AES, Feistel Networks, Shannon's Confusion-Diffusion Theory
