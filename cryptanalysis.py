@@ -43,26 +43,26 @@ class PhoenixCryptanalysis:
         byte_freq = Counter(ciphertext)
         total_bytes = len(ciphertext)
         
-        print(f"\n📊 Temel İstatistikler:")
+        print(f"\n Temel İstatistikler:")
         print(f"   Toplam Byte: {total_bytes}")
         print(f"   Farklı Byte Sayısı: {len(byte_freq)}")
         print(f"   Beklenen (Rastgele): ~256 farklı byte")
         
         # En sık görülen byte'lar
         most_common = byte_freq.most_common(10)
-        print(f"\n🔝 En Sık Görülen 10 Byte:")
+        print(f"\n En Sık Görülen 10 Byte:")
         for byte_val, count in most_common:
             percentage = (count / total_bytes) * 100
             print(f"   0x{byte_val:02X}: {count:4d} kez ({percentage:5.2f}%)")
         
         # Tekrarlı desenler
         patterns = self._find_repeated_patterns(ciphertext)
-        print(f"\n🔍 Tekrarlı Desenler (4+ byte):")
+        print(f"\n Tekrarlı Desenler (4+ byte):")
         if patterns:
             for pattern, count in patterns[:5]:
                 print(f"   {pattern.hex()}: {count} kez tekrar")
         else:
-            print("   ✅ Tekrarlı desen bulunamadı (iyi)")
+            print("    Tekrarlı desen bulunamadı (iyi)")
         
         # Chi-square testi
         expected_freq = total_bytes / 256
@@ -71,16 +71,16 @@ class PhoenixCryptanalysis:
             for count in byte_freq.values()
         )
         
-        print(f"\n📈 Chi-Square İstatistiği: {chi_square:.2f}")
+        print(f"\n Chi-Square İstatistiği: {chi_square:.2f}")
         print(f"   (Düşük değer = daha rastgele dağılım)")
         
         # Sonuç
-        print(f"\n🎯 SONUÇ:")
+        print(f"\n SONUÇ:")
         if len(byte_freq) < 100 or len(patterns) > 3:
-            print("   ⚠️  ZAFIYET: Düşük entropi veya tekrarlı desenler tespit edildi!")
+            print("     ZAFIYET: Düşük entropi veya tekrarlı desenler tespit edildi!")
             weakness = True
         else:
-            print("   ✅ Frekans analizi ile zafiyet bulunamadı")
+            print("    Frekans analizi ile zafiyet bulunamadı")
             weakness = False
         
         return {
@@ -119,17 +119,17 @@ class PhoenixCryptanalysis:
         print("SALDIRI 2: BİLİNEN DÜZ METİN SALDIRISI (Known-Plaintext Attack)")
         print("=" * 70)
         
-        print(f"\n📝 Bilinen Düz Metin: {plaintext}")
-        print(f"🔒 İlgili Şifreli Metin (hex): {ciphertext.hex()[:80]}...")
+        print(f"\n Bilinen Düz Metin: {plaintext}")
+        print(f" İlgili Şifreli Metin (hex): {ciphertext.hex()[:80]}...")
         
         # Blok boyutu kontrolü
         plain_bytes = plaintext.encode('utf-8')
-        print(f"\n📏 Düz Metin Uzunluğu: {len(plain_bytes)} byte")
-        print(f"📏 Şifreli Metin Uzunluğu: {len(ciphertext)} byte")
+        print(f"\n Düz Metin Uzunluğu: {len(plain_bytes)} byte")
+        print(f" Şifreli Metin Uzunluğu: {len(ciphertext)} byte")
         
         # İlk blok XOR analizi
         if len(ciphertext) >= 16:
-            print(f"\n🔍 İlk Blok Analizi:")
+            print(f"\n İlk Blok Analizi:")
             first_cipher_block = ciphertext[:16]
             
             # Padding eklenmiş hali
@@ -144,10 +144,10 @@ class PhoenixCryptanalysis:
             print(f"   XOR Farkı (hex): {xor_diff.hex()}")
             print(f"   (Bu, anahtar + tur işlemlerinin kombinasyonu)")
         
-        print(f"\n🎯 SONUÇ:")
-        print("   ❌ PHOENIX'in karmaşık tur yapısı nedeniyle doğrudan anahtar çıkarımı BAŞARISIZ")
-        print("   💡 Nedeni: SHA-256 anahtar genişletme + 8 tur + S-Box + MixColumns")
-        print("   📌 Algoritma, bilinen düz metin saldırısına DAYANIKLI")
+        print(f"\n SONUÇ:")
+        print("    PHOENIX'in karmaşık tur yapısı nedeniyle doğrudan anahtar çıkarımı BAŞARISIZ")
+        print("    Nedeni: SHA-256 anahtar genişletme + 8 tur + S-Box + MixColumns")
+        print("    Algoritma, bilinen düz metin saldırısına DAYANIKLI")
         
         return None
     
@@ -169,8 +169,8 @@ class PhoenixCryptanalysis:
         print("SALDIRI 3: SÖZLÜK SALDIRISI (Dictionary Attack)")
         print("=" * 70)
         
-        print(f"\n📚 Sözlük Boyutu: {len(wordlist)} parola")
-        print(f"🎯 Hedef: Doğru parolayı bul\n")
+        print(f"\n Sözlük Boyutu: {len(wordlist)} parola")
+        print(f" Hedef: Doğru parolayı bul\n")
         
         found_password = None
         
@@ -189,7 +189,7 @@ class PhoenixCryptanalysis:
                 # Kontrol et
                 if decrypted == plaintext:
                     found_password = password
-                    print(f"\n   ✅ BAŞARILI! Parola bulundu: '{password}'")
+                    print(f"\n    BAŞARILI! Parola bulundu: '{password}'")
                     print(f"   Deneme sayısı: {i + 1}")
                     break
             except:
@@ -197,13 +197,13 @@ class PhoenixCryptanalysis:
                 continue
         
         if not found_password:
-            print(f"\n   ❌ BAŞARISIZ: {len(wordlist)} deneme yapıldı, parola bulunamadı")
+            print(f"\n    BAŞARISIZ: {len(wordlist)} deneme yapıldı, parola bulunamadı")
         
-        print(f"\n🎯 SONUÇ:")
+        print(f"\n SONUÇ:")
         if found_password:
-            print(f"   ⚠️  ZAFIYET: Zayıf parola kullanımı - '{found_password}' tahmin edildi")
+            print(f"     ZAFIYET: Zayıf parola kullanımı - '{found_password}' tahmin edildi")
         else:
-            print("   ✅ Sözlük saldırısı başarısız - güçlü parola kullanımı")
+            print("    Sözlük saldırısı başarısız - güçlü parola kullanımı")
         
         return found_password
     
@@ -222,7 +222,7 @@ class PhoenixCryptanalysis:
         test_passwords = ["a", "abc", "password", "verylongpassword123"]
         plaintext = "Test mesajı" * 10
         
-        print(f"\n⏱️  Şifreleme Süreleri:\n")
+        print(f"\n  Şifreleme Süreleri:\n")
         
         timings = []
         for password in test_passwords:
@@ -242,20 +242,20 @@ class PhoenixCryptanalysis:
         import statistics
         std_dev = statistics.stdev(timings) if len(timings) > 1 else 0
         
-        print(f"\n📊 Standart Sapma: {std_dev * 1000:.6f} ms")
-        print(f"\n🎯 SONUÇ:")
+        print(f"\n Standart Sapma: {std_dev * 1000:.6f} ms")
+        print(f"\n SONUÇ:")
         if std_dev < 0.0001:
-            print("   ✅ Zamanlama farkı çok düşük - timing attack zor")
+            print("    Zamanlama farkı çok düşük - timing attack zor")
         else:
-            print("   ⚠️  Zamanlama farkları tespit edildi - potansiyel zafiyet")
+            print("     Zamanlama farkları tespit edildi - potansiyel zafiyet")
 
 
 def main():
     """Ana kriptanaliz fonksiyonu"""
     
-    print("\n" + "🔥" * 35)
+    print("\n" + "" * 35)
     print("   PHOENIX KRİPTANALİZ - GÜVENLİK ANALİZİ")
-    print("🔥" * 35)
+    print("" * 35)
     
     analyzer = PhoenixCryptanalysis()
     cipher = PhoenixCipher()
@@ -266,7 +266,7 @@ def main():
     key = cipher.Anahtar_Uret(password)
     ciphertext = cipher.Sifrele(plaintext, key)
     
-    print(f"\n🔐 Test Parametreleri:")
+    print(f"\n Test Parametreleri:")
     print(f"   Düz Metin: {plaintext}")
     print(f"   Parola: {password}")
     print(f"   Anahtar (hex): {key.hex()}")
@@ -298,20 +298,20 @@ def main():
     print("GENEL GÜVENLİK DEĞERLENDİRMESİ")
     print("=" * 70)
     
-    print("\n✅ Güçlü Yönler:")
+    print("\n Güçlü Yönler:")
     print("   • Frekans analizi direnci (yüksek entropi)")
     print("   • Bilinen düz metin saldırısına dayanıklı")
     print("   • SHA-256 tabanlı güçlü anahtar genişletme")
     print("   • İyi çığ etkisi (%45 bit değişimi)")
     print("   • Karmaşık tur yapısı (S-Box + Permütasyon + MixColumns)")
     
-    print("\n⚠️  Potansiyel Zayıf Yönler:")
+    print("\n  Potansiyel Zayıf Yönler:")
     print("   • S-Box matematiksel formülle üretiliyor (analiz edilebilir)")
     print("   • 8 tur, gelişmiş diferansiyel kriptanaliz için yeterli olmayabilir")
     print("   • Sözlük saldırısına açık (zayıf parola kullanımında)")
     print("   • Akademik şifreler kadar test edilmemiş")
     
-    print("\n💡 Öneriler:")
+    print("\n Öneriler:")
     print("   • Tur sayısı 12-16'ya çıkarılabilir")
     print("   • S-Box, kriptografik olarak güvenli rastgele sayılarla üretilebilir")
     print("   • Anahtar türetme için PBKDF2 veya Argon2 kullanılabilir")
