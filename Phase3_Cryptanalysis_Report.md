@@ -45,17 +45,17 @@ Bu analizde **4 farklı saldırı yöntemi** uygulanmıştır:
 
 ### 3.1 SALDIRI 1: Frekans Analizi
 
-#### 📋 Amaç
+####  Amaç
 Şifreli metindeki byte frekanslarını analiz ederek istatistiksel zayıflıkları tespit etmek.
 
-#### 🔬 Yöntem
+####  Yöntem
 
 1. Şifreli metindeki her byte'ın frekansını hesapla
 2. Chi-square testi uygula
 3. Tekrarlı desenleri ara (4+ byte)
 4. Entropi seviyesini değerlendir
 
-#### 📊 Sonuçlar
+####  Sonuçlar
 
 ```
 Test Parametreleri:
@@ -76,9 +76,9 @@ Test Parametreleri:
 0xED: 2 kez (3.12%)
 ```
 
-#### 🎯 Değerlendirme
+####  Değerlendirme
 
-⚠️ **Küçük zafiyet tespit edildi**: 64 byte'lık örneklemde yeterli entropi var ancak bazı byte'lar beklenenden fazla tekrar ediyor.
+ **Küçük zafiyet tespit edildi**: 64 byte'lık örneklemde yeterli entropi var ancak bazı byte'lar beklenenden fazla tekrar ediyor.
 
 **Analiz:**
 - Küçük veri setinde bazı byte frekansları yüksek
@@ -89,17 +89,17 @@ Test Parametreleri:
 
 ### 3.2 SALDIRI 2: Bilinen Düz Metin Saldırısı
 
-#### 📋 Amaç
+####  Amaç
 Düz metin-şifreli metin çifti kullanarak anahtarı veya algoritma parametrelerini çıkarmak.
 
-#### 🔬 Yöntem
+####  Yöntem
 
 1. Bilinen düz metin ve şifreli metin çiftini al
 2. İlk blokta XOR analizi yap
 3. Anahtar whitening'i izole etmeye çalış
 4. Tur anahtarlarını tahmin et
 
-#### 📊 Sonuçlar
+####  Sonuçlar
 
 ```
 İlk Blok Analizi:
@@ -109,13 +109,13 @@ XOR Farkı:       7B 98 54 53 25 88 40 C7 43 19 32 FB B5 EE F1 72
 ```
 
 **Denenen Yaklaşımlar:**
-1. ✗ XOR farkından doğrudan anahtar çıkarımı → BAŞARISIZ
-2. ✗ Tur anahtarı tahminleri → BAŞARISIZ
-3. ✗ S-Box ters mühendisliği → BAŞARISIZ (SHA-256 koruması)
+1.  XOR farkından doğrudan anahtar çıkarımı → BAŞARISIZ
+2.  Tur anahtarı tahminleri → BAŞARISIZ
+3.  S-Box ters mühendisliği → BAŞARISIZ (SHA-256 koruması)
 
-#### 🎯 Değerlendirme
+####  Değerlendirme
 
-✅ **Algoritma dayanıklı!**
+ **Algoritma dayanıklı!**
 
 **Nedenleri:**
 - SHA-256 tabanlı anahtar genişletme, doğrudan anahtar çıkarımını önlüyor
@@ -128,17 +128,17 @@ XOR Farkı:       7B 98 54 53 25 88 40 C7 43 19 32 FB B5 EE F1 72
 
 ### 3.3 SALDIRI 3: Sözlük Saldırısı (Brute Force)
 
-#### 📋 Amaç
+####  Amaç
 Yaygın kullanılan parolaları deneyerek zayıf parola kullanımını kırmak.
 
-#### 🔬 Yöntem
+####  Yöntem
 
 1. Yaygın 10,000 parola listesi hazırla
 2. Her parolayı `Anahtar_Uret()` ile anahtar üret
 3. Şifreli metni deşifrele
 4. Sonucu bilinen düz metin ile karşılaştır
 
-#### 📊 Sonuçlar
+####  Sonuçlar
 
 ```
 Sözlük Boyutu: 21 parola
@@ -149,15 +149,15 @@ Deneme Sırası:
 2. "password" → BAŞARISIZ
 3. "qwerty" → BAŞARISIZ
 ...
-21. "TestPassword123" → ✅ BAŞARILI!
+21. "TestPassword123" →  BAŞARILI!
 ```
 
 **Bulunan Parola:** `TestPassword123`  
 **Deneme Sayısı:** 21
 
-#### 🎯 Değerlendirme
+####  Değerlendirme
 
-⚠️ **ZAFIYET BULUNDU!**
+ **ZAFIYET BULUNDU!**
 
 **Analiz:**
 - Algoritma kriptografik olarak güvenli ANCAK
@@ -177,17 +177,17 @@ Tahmini Süre: ~33 dakika
 
 ### 3.4 SALDIRI 4: Zamanlama Saldırısı
 
-#### 📋 Amaç
+####  Amaç
 Şifreleme işlemi süresindeki farklılıklardan bilgi sızdırması olup olmadığını test etmek.
 
-#### 🔬 Yöntem
+####  Yöntem
 
 1. Farklı uzunluklarda parolalar kullan
 2. Her parola için 100 kez şifreleme yap
 3. Ortalama süreleri ölç
 4. İstatistiksel analiz (standart sapma)
 
-#### 📊 Sonuçlar
+####  Sonuçlar
 
 ```
 Şifreleme Süreleri (Ortalama, 100 iterasyon):
@@ -199,9 +199,9 @@ Parola: "verylongpassword123"  → 1.8593 ms
 Standart Sapma: 0.018878 ms (~1.04% varyasyon)
 ```
 
-#### 🎯 Değerlendirme
+####  Değerlendirme
 
-✅ **Zamanlama saldırısına dirençli!**
+ **Zamanlama saldırısına dirençli!**
 
 **Analiz:**
 - Parola uzunluğu şifreleme süresini minimal etkiliyor
@@ -217,7 +217,7 @@ Standart Sapma: 0.018878 ms (~1.04% varyasyon)
 
 ### 4.1 Bulunan Zafiyetler
 
-#### ⚠️ Zafiyet 1: Zayıf Parola Kullanımı (CRİTİK)
+####  Zafiyet 1: Zayıf Parola Kullanımı (CRİTİK)
 
 **Açıklama:** Algoritma SHA-256 kullanarak güvenli anahtar üretse de, kullanıcı zayıf parola seçerse sözlük saldırısıyla kırılabilir.
 
@@ -248,7 +248,7 @@ def Anahtar_Uret(parola, salt, iterations=100000):
 
 ---
 
-#### ⚠️ Zafiyet 2: S-Box Tahmin Edilebilir (ORTA)
+####  Zafiyet 2: S-Box Tahmin Edilebilir (ORTA)
 
 **Açıklama:** S-Box matematiksel formülle üretiliyor:
 ```python
@@ -270,7 +270,7 @@ S(x) = ((x ⊕ 0x63) * 0x1B) mod 256
 
 ---
 
-#### ⚠️ Zafiyet 3: 8 Tur Yetersiz Olabilir (DÜŞÜK)
+####  Zafiyet 3: 8 Tur Yetersiz Olabilir (DÜŞÜK)
 
 **Açıklama:** Gelişmiş diferansiyel/lineer kriptanaliz için 8 tur yeterli olmayabilir.
 
@@ -285,24 +285,24 @@ S(x) = ((x ⊕ 0x63) * 0x1B) mod 256
 
 ### 4.2 Güçlü Yönler
 
-#### ✅ Güçlü Yön 1: Çığ Etkisi
+####  Güçlü Yön 1: Çığ Etkisi
 
 **Test Sonucu:** Anahtar'da 1 bit değişiklik → şifreli metinde %45.12 bit değişimi
 
 **İdeal:** ~%50  
-**PHOENIX:** %45.12 ✅  
+**PHOENIX:** %45.12  
 **Değerlendirme:** Çok iyi çığ etkisi
 
 ---
 
-#### ✅ Güçlü Yön 2: Padding Güvenliği
+####  Güçlü Yön 2: Padding Güvenliği
 
 **Test:** 6 farklı boyutta metin (1-100 byte)  
 **Sonuç:** Tüm testler başarılı, padding leak yok
 
 ---
 
-#### ✅ Güçlü Yön 3: Anahtar Genişletme
+####  Güçlü Yön 3: Anahtar Genişletme
 
 **Yöntem:** SHA-256(key || round_number)  
 **Avantaj:**
@@ -334,13 +334,13 @@ S(x) = ((x ⊕ 0x63) * 0x1B) mod 256
 
 | Özellik | PHOENIX | AES-128 | Yorum |
 |---------|---------|---------|-------|
-| Blok Boyutu | 128 bit | 128 bit | ✅ Eşit |
-| Anahtar Boyutu | 128 bit | 128 bit | ✅ Eşit |
-| Tur Sayısı | 8 | 10 | ⚠️ AES daha fazla |
-| S-Box | Formül bazlı | NIST onaylı | ⚠️ AES daha güvenli |
-| Anahtar Türetme | SHA-256 | Rijndael | ⚠️ AES daha test edilmiş |
-| Performans | ~1.8 ms/blok | ~0.1 ms/blok | ⚠️ AES çok hızlı (donanım desteği) |
-| Akademik Test | Yok | 20+ yıl | ⚠️ AES kanıtlanmış |
+| Blok Boyutu | 128 bit | 128 bit |  Eşit |
+| Anahtar Boyutu | 128 bit | 128 bit |  Eşit |
+| Tur Sayısı | 8 | 10 |  AES daha fazla |
+| S-Box | Formül bazlı | NIST onaylı |  AES daha güvenli |
+| Anahtar Türetme | SHA-256 | Rijndael |  AES daha test edilmiş |
+| Performans | ~1.8 ms/blok | ~0.1 ms/blok |  AES çok hızlı (donanım desteği) |
+| Akademik Test | Yok | 20+ yıl |  AES kanıtlanmış |
 
 **Sonuç:** PHOENIX akademik bir proje olarak iyi tasarlanmış ancak AES gibi endüstri standardı algoritmalarla rekabet edemez.
 
@@ -350,7 +350,7 @@ S(x) = ((x ⊕ 0x63) * 0x1B) mod 256
 
 ### 6.1 Eğer Algoritma Kırıldıysa
 
-✅ **EVET, kısmi olarak kırıldı:**
+ **EVET, kısmi olarak kırıldı:**
 
 **Kırılma Yöntemi:** Sözlük Saldırısı  
 **Kırılan Parola:** `TestPassword123`  
@@ -366,7 +366,7 @@ S(x) = ((x ⊕ 0x63) * 0x1B) mod 256
 
 ### 6.2 Eğer Kırılamadıysa
 
-⚠️ **Kısmi başarı:** Sözlük saldırısı hariç diğer saldırılara dayanıklı.
+ **Kısmi başarı:** Sözlük saldırısı hariç diğer saldırılara dayanıklı.
 
 **Algoritmanın Güçlü Yönleri:**
 1. Bilinen düz metin saldırısına dirençli
@@ -383,7 +383,7 @@ S(x) = ((x ⊕ 0x63) * 0x1B) mod 256
 
 ### 6.3 İyileştirme Önerileri
 
-#### 🔧 Öncelik 1: Parola Türetmeyi Güçlendir
+####  Öncelik 1: Parola Türetmeyi Güçlendir
 
 ```python
 # KDF kullan (Key Derivation Function)
@@ -406,7 +406,7 @@ def Anahtar_Uret_V2(parola, salt=None):
 
 ---
 
-#### 🔧 Öncelik 2: S-Box'ı İyileştir
+####  Öncelik 2: S-Box'ı İyileştir
 
 ```python
 # AES S-Box kullan (NIST onaylı)
@@ -419,7 +419,7 @@ AES_SBOX = [
 
 ---
 
-#### 🔧 Öncelik 3: Tur Sayısını Artır
+####  Öncelik 3: Tur Sayısını Artır
 
 ```python
 NUM_ROUNDS = 12  # 8 yerine 12
@@ -429,7 +429,7 @@ NUM_ROUNDS = 12  # 8 yerine 12
 
 ---
 
-#### 🔧 Öncelik 4: Mod of Operation Ekle
+####  Öncelik 4: Mod of Operation Ekle
 
 ```python
 # CBC (Cipher Block Chaining) modu
@@ -444,14 +444,14 @@ NUM_ROUNDS = 12  # 8 yerine 12
 ### 6.4 Final Yorum
 
 PHOENIX algoritması, **eğitim amaçlı bir proje olarak başarılı**:
-- ✅ Temel kriptografik prensipler uygulanmış
-- ✅ Çoğu saldırı türüne dirençli
-- ✅ Kod kalitesi yüksek, okunabilir
+-  Temel kriptografik prensipler uygulanmış
+-  Çoğu saldırı türüne dirençli
+-  Kod kalitesi yüksek, okunabilir
 
 Ancak **üretim ortamında kullanılmamalı**:
-- ⚠️ Yeterince test edilmemiş
-- ⚠️ Zayıf parola kullanımında kırılabilir
-- ⚠️ AES/ChaCha20 gibi kanıtlanmış algoritmalar tercih edilmeli
+-  Yeterince test edilmemiş
+-  Zayıf parola kullanımında kırılabilir
+-  AES/ChaCha20 gibi kanıtlanmış algoritmalar tercih edilmeli
 
 ---
 
