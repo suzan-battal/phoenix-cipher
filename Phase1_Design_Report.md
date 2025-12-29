@@ -38,10 +38,10 @@ Phoenix (Anka Kuşu), küllerinden yeniden doğar - bu algoritma da her turda ve
 
 PHOENIX, aşağıdaki saldırılara karşı dayanıklı olmayı amaçlar:
 
-- ✅ **Brute Force Saldırıları**: 128-bit anahtar uzayı (2^128 kombinasyon)
-- ✅ **Frekans Analizi**: S-Box ve permütasyon ile istatistiksel desenler yok edilir
-- ✅ **Diferansiyel Kriptanaliz**: Her turda güçlü yayılma ile değişiklikler tüm bloka dağılır
-- ✅ **Lineer Kriptanaliz**: Doğrusal olmayan S-Box ve modüler işlemlerle korunur
+-  **Brute Force Saldırıları**: 128-bit anahtar uzayı (2^128 kombinasyon)
+-  **Frekans Analizi**: S-Box ve permütasyon ile istatistiksel desenler yok edilir
+-  **Diferansiyel Kriptanaliz**: Her turda güçlü yayılma ile değişiklikler tüm bloka dağılır
+-  **Lineer Kriptanaliz**: Doğrusal olmayan S-Box ve modüler işlemlerle korunur
 
 ### 2.3 Tasarım Kararları
 
@@ -418,17 +418,16 @@ E7 A9 3C FF ... (tamamen farklı görünümlü)
 ## 8. Sonuç ve Beklentiler
 
 PHOENIX algoritması:
-
-✅ **Güvenlik**: 128-bit anahtar, 8 tur, güçlü yayılma  
-✅ **Performans**: Basit işlemler (XOR, table lookup, byte permutation)  
-✅ **Simetri**: Şifreleme ve deşifreleme benzer yapıda  
-✅ **Test Edilebilirlik**: Çığ etkisi ölçülebilir  
+ **Güvenlik**: 128-bit anahtar, 8 tur, güçlü yayılma  
+ **Performans**: Basit işlemler (XOR, table lookup, byte permutation)  
+ **Simetri**: Şifreleme ve deşifreleme benzer yapıda  
+ **Test Edilebilirlik**: Çığ etkisi ölçülebilir  
 
 ### Potansiyel Zayıf Noktalar
 
-⚠️ **S-Box Basitliği**: Matematiksel formül ile üretildiği için analiz edilebilir  
-⚠️ **8 Tur**: Bazı gelişmiş saldırılara karşı yeterli olmayabilir  
-⚠️ **Test Edilmemiş**: Akademik şifreleme algoritmalarından daha az güvenli olabilir
+ **S-Box Basitliği**: Matematiksel formül ile üretildiği için analiz edilebilir  
+ **8 Tur**: Bazı gelişmiş saldırılara karşı yeterli olmayabilir  
+ **Test Edilmemiş**: Akademik şifreleme algoritmalarından daha az güvenli olabilir
 
 ---
 
