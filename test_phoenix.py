@@ -54,18 +54,18 @@ def test_1_basic_encryption_decryption():
         
         # Doğrula
         if duz_metin == cozulmus:
-            print("   ✅ BAŞARILI: Şifreleme ve deşifreleme doğru!")
+            print("    BAŞARILI: Şifreleme ve deşifreleme doğru!")
         else:
-            print("   ❌ BAŞARISIZ: Deşifreleme hatalı!")
+            print("    BAŞARISIZ: Deşifreleme hatalı!")
             print(f"   Beklenen: {duz_metin}")
             print(f"   Alınan: {cozulmus}")
             all_passed = False
     
     print("\n" + "-" * 70)
     if all_passed:
-        print("🎉 TEST 1 SONUÇ: TÜM TEST CASE'LER BAŞARILI")
+        print(" TEST 1 SONUÇ: TÜM TEST CASE'LER BAŞARILI")
     else:
-        print("⚠️  TEST 1 SONUÇ: BAŞARISIZ TEST VAR")
+        print("  TEST 1 SONUÇ: BAŞARISIZ TEST VAR")
     print("=" * 70)
     
     return all_passed
@@ -85,73 +85,73 @@ def test_2_avalanche_effect():
     
     # Test metni
     duz_metin = "Bu metin çığ etkisi testi için kullanılıyor."
-    print(f"\n📝 Düz Metin: {duz_metin}")
+    print(f"\n Düz Metin: {duz_metin}")
     
     # Orijinal anahtar
     parola = "OriginalPassword"
     anahtar1 = cipher.Anahtar_Uret(parola)
-    print(f"\n🔑 Orijinal Anahtar (hex): {anahtar1.hex()}")
+    print(f"\n Orijinal Anahtar (hex): {anahtar1.hex()}")
     
     # 1 bit değiştirilmiş anahtar (ilk byte'ın ilk biti)
     anahtar2 = bytearray(anahtar1)
     anahtar2[0] ^= 0x01  # İlk bitin flip edilmesi
     anahtar2 = bytes(anahtar2)
-    print(f"🔑 Değiştirilmiş Anahtar (hex): {anahtar2.hex()}")
+    print(f" Değiştirilmiş Anahtar (hex): {anahtar2.hex()}")
     print(f"   (İlk bit değiştirildi: {anahtar1[0]:08b} → {anahtar2[0]:08b})")
     
     # Orijinal anahtarla şifrele
     sifreli1 = cipher.Sifrele(duz_metin, anahtar1)
-    print(f"\n🔒 Şifreli Metin 1 (hex): {sifreli1.hex()}")
+    print(f"\n Şifreli Metin 1 (hex): {sifreli1.hex()}")
     
     # Değiştirilmiş anahtarla şifrele
     sifreli2 = cipher.Sifrele(duz_metin, anahtar2)
-    print(f"🔒 Şifreli Metin 2 (hex): {sifreli2.hex()}")
+    print(f" Şifreli Metin 2 (hex): {sifreli2.hex()}")
     
     # Hamming mesafesi (kaç bit farklı)
     hamming_distance = sum(bin(b1 ^ b2).count('1') for b1, b2 in zip(sifreli1, sifreli2))
     total_bits = len(sifreli1) * 8
     change_percentage = (hamming_distance / total_bits) * 100
     
-    print(f"\n📊 Çığ Etkisi İstatistikleri:")
+    print(f"\n Çığ Etkisi İstatistikleri:")
     print(f"   Toplam Bit Sayısı: {total_bits}")
     print(f"   Değişen Bit Sayısı: {hamming_distance}")
     print(f"   Değişim Oranı: {change_percentage:.2f}%")
     print(f"   İdeal Değişim: ~50%")
     
     # Yanlış anahtarla deşifreleme dene
-    print("\n🔓 Yanlış Anahtarla Deşifreleme Denemesi:")
+    print("\n Yanlış Anahtarla Deşifreleme Denemesi:")
     try:
         yanlis_cozum = cipher.Desifrele(sifreli1, anahtar2)
         print(f"   Sonuç: {yanlis_cozum}")
-        print("   ✅ Orijinal metinden tamamen farklı (çöp veri)")
+        print("    Orijinal metinden tamamen farklı (çöp veri)")
         
         if yanlis_cozum == duz_metin:
-            print("   ❌ PROBLEM: Aynı metne ulaşıldı!")
+            print("    PROBLEM: Aynı metne ulaşıldı!")
             avalanche_passed = False
         else:
             avalanche_passed = True
     except Exception as e:
-        print(f"   ✅ Deşifreleme hatası oluştu (beklenen): {e}")
+        print(f"    Deşifreleme hatası oluştu (beklenen): {e}")
         avalanche_passed = True
     
     # Doğru anahtarla doğrulama
-    print("\n🔓 Doğru Anahtarla Deşifreleme:")
+    print("\n Doğru Anahtarla Deşifreleme:")
     dogru_cozum = cipher.Desifrele(sifreli1, anahtar1)
     print(f"   Sonuç: {dogru_cozum}")
     
     if dogru_cozum == duz_metin:
-        print("   ✅ Orijinal metin elde edildi!")
+        print("    Orijinal metin elde edildi!")
     else:
-        print("   ❌ PROBLEM: Orijinal metin elde edilemedi!")
+        print("    PROBLEM: Orijinal metin elde edilemedi!")
         avalanche_passed = False
     
     # Çığ etkisi kriteri (en az %25 değişim olmalı)
     print("\n" + "-" * 70)
     if change_percentage >= 25 and avalanche_passed:
-        print(f"🎉 TEST 2 SONUÇ: ÇIĞ ETKİSİ BAŞARILI (Değişim: {change_percentage:.2f}%)")
+        print(f" TEST 2 SONUÇ: ÇIĞ ETKİSİ BAŞARILI (Değişim: {change_percentage:.2f}%)")
         result = True
     else:
-        print(f"⚠️  TEST 2 SONUÇ: ÇIĞ ETKİSİ YETERSİZ (Değişim: {change_percentage:.2f}%)")
+        print(f"  TEST 2 SONUÇ: ÇIĞ ETKİSİ YETERSİZ (Değişim: {change_percentage:.2f}%)")
         result = False
     print("=" * 70)
     
@@ -186,7 +186,7 @@ def test_3_different_block_sizes():
         sifreli = cipher.Sifrele(text, anahtar)
         cozulmus = cipher.Desifrele(sifreli, anahtar)
         
-        status = "✅" if text == cozulmus else "❌"
+        status = "" if text == cozulmus else "❌"
         print(f"{status} Boyut: {len(text):3d} byte → Şifreli: {len(sifreli):3d} byte")
         
         if text != cozulmus:
@@ -194,9 +194,9 @@ def test_3_different_block_sizes():
     
     print("\n" + "-" * 70)
     if all_passed:
-        print("🎉 TEST 3 SONUÇ: TÜM BOYUTLAR İÇİN BAŞARILI")
+        print(" TEST 3 SONUÇ: TÜM BOYUTLAR İÇİN BAŞARILI")
     else:
-        print("⚠️  TEST 3 SONUÇ: BAŞARISIZ")
+        print("  TEST 3 SONUÇ: BAŞARISIZ")
     print("=" * 70)
     
     return all_passed
@@ -217,8 +217,8 @@ def analyze_encryption_randomness():
     duz_metin = "AAAAAAAAAAAAAAAA" * 10  # 160 A karakteri
     sifreli = cipher.Sifrele(duz_metin, anahtar)
     
-    print(f"\n📝 Düz Metin: {'A' * 16}... (160 karakter 'A')")
-    print(f"🔒 Şifreli (hex): {sifreli.hex()[:80]}...")
+    print(f"\n Düz Metin: {'A' * 16}... (160 karakter 'A')")
+    print(f" Şifreli (hex): {sifreli.hex()[:80]}...")
     
     # Byte frekans analizi
     byte_freq = [0] * 256
@@ -237,7 +237,7 @@ def analyze_encryption_randomness():
     print(f"   Ortalama Frekans: {avg_freq:.2f}")
     print(f"   Standart Sapma: {(sum((f - avg_freq) ** 2 for f in byte_freq) / 256) ** 0.5:.2f}")
     
-    print("\n   💡 İdeal rastgele şifreli metinde tüm byte'lar yaklaşık eşit sıklıkta görülür.")
+    print("\n    İdeal rastgele şifreli metinde tüm byte'lar yaklaşık eşit sıklıkta görülür.")
     print("=" * 70)
 
 
@@ -245,9 +245,9 @@ def main():
     """
     Ana test fonksiyonu - tüm testleri çalıştırır
     """
-    print("\n" + "🔥" * 35)
+    print("\n" + "" * 35)
     print("   PHOENIX ŞİFRELEME ALGORİTMASI - TEST SÜİTİ")
-    print("🔥" * 35)
+    print("" * 35)
     
     # Test 1
     test1_result = test_1_basic_encryption_decryption()
@@ -265,16 +265,16 @@ def main():
     print("\n" + "=" * 70)
     print("GENEL TEST SONUÇLARI")
     print("=" * 70)
-    print(f"Test 1 (Şifreleme/Deşifreleme): {'✅ BAŞARILI' if test1_result else '❌ BAŞARISIZ'}")
-    print(f"Test 2 (Çığ Etkisi):            {'✅ BAŞARILI' if test2_result else '❌ BAŞARISIZ'}")
-    print(f"Test 3 (Padding):               {'✅ BAŞARILI' if test3_result else '❌ BAŞARISIZ'}")
+    print(f"Test 1 (Şifreleme/Deşifreleme): {' BAŞARILI' if test1_result else '❌ BAŞARISIZ'}")
+    print(f"Test 2 (Çığ Etkisi):            {' BAŞARILI' if test2_result else '❌ BAŞARISIZ'}")
+    print(f"Test 3 (Padding):               {' BAŞARILI' if test3_result else '❌ BAŞARISIZ'}")
     print("=" * 70)
     
     if test1_result and test2_result and test3_result:
-        print("\n🎉🎉🎉 TÜM TESTLER BAŞARILI - PHOENIX ALGORİTMASI ÇALIŞIYOR! 🎉🎉🎉\n")
+        print("\n TÜM TESTLER BAŞARILI - PHOENIX ALGORİTMASI ÇALIŞIYOR! \n")
         return 0
     else:
-        print("\n⚠️  BAZI TESTLER BAŞARISIZ - GÖZDEN GEÇİRİLMELİ ⚠️\n")
+        print("\n  BAZI TESTLER BAŞARISIZ - GÖZDEN GEÇİRİLMELİ \n")
         return 1
 
 
